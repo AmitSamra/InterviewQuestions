@@ -9,14 +9,12 @@ w1 = 'you'
 def word_list(paragraph, word):
     a = []
     for i in paragraph.split('.'):
-        for j in i.split():
-            if j == word:
+        for j in i.split(' '):
+            if j.lower() == word.lower():
                 a.append(i)
     
     a = [x.strip() for x in a]
-
+    
     return a
-
-
 
 print(word_list(p1,w1))
