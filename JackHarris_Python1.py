@@ -12,8 +12,6 @@ You can’t turn them into numbers and then back to strings.
 2. Your code should work for any set of numbers, not just the ones above
 """
 
-a = ['8','10','16','1','100','101','200','1000']
-
 def string_num(x):
     
     sorted_list = sorted(x)
@@ -36,6 +34,9 @@ def string_num(x):
             list1.append(k)
     
     return list1
-    
-string_num(a)
 
+a = ['8','10','16','1','100','101','200','1000']
+print(string_num(a))
+
+b = ['-50', '-10','-100','-80','8','10','16','1','100','101','200','1000']
+print(string_num(b))
