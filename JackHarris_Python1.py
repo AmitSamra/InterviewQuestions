@@ -1,6 +1,7 @@
 """
-Given: an array of numbers but stored as strings.
+Jack Harris
 
+Given: an array of numbers but stored as strings.
 Task: Sort them in ascending order
 
 Example: instead of {9, 8, 3} you have {“9”, “8”, “3”},
@@ -14,26 +15,54 @@ You can’t turn them into numbers and then back to strings.
 
 def string_num(x):
     
-    sorted_list = sorted(x)
-    sorted_list_len = []
-    for i in sorted_list:
-        sorted_list_len.append(len(i))
-        
-    # sorted_list = ['1', '10', '100', '1000', '101', '16', '200', '8']
-    # sorted_list_len = [1, 2, 3, 4, 3, 2, 3, 1]
+    d_pos = {}
+    d_neg = {}
     
-    dict1 = {}
-    for i in sorted_list_len:
-        dict1[i] = []
-    for i,j in zip(sorted_list_len, sorted_list):
-        dict1[i].append(j)
+    # create empty lists in d_pos & d_neg
+    for i in x:
+        if i[0] != '-':
+            d_pos[len(i)] = []
+        else:
+            d_neg[len(i)-1] = []
+
+    # add positive items to d_pos
+    for i in x:
+        if i[0] != '-':
+            d_pos[len(i)].append(i)
+    for i,j in d_pos.items():
+        j.sort()
     
-    list1 = []
-    for i,j in dict1.items():
-        for k in j:
-            list1.append(k)
+    # add negative items to d_neg
+    for i in x:
+        if i[0] == '-':
+            d_neg[len(i)-1].append(i)
+    for i,j in d_neg.items():
+        j.sort(reverse = True)
     
-    return list1
+    pos_list = []
+    neg_list = []
+    
+    # add positive items to pos_list
+    for i,j in d_pos.items():
+        for item in j:
+            pos_list.append(item)
+    
+    # add negative items to neg_list
+    for i,j in d_neg.items():
+        for item in j[::-1]:
+            neg_list.append(item)
+    
+    final_list = []
+    
+    # add neg_list items to final_list
+    for i in neg_list[::-1]:
+        final_list.append(i)
+    
+    # add pos_list items to final list
+    for i in pos_list:
+        final_list.append(i)
+    
+    return final_list
 
 a = ['8','10','16','1','100','101','200','1000']
 print(string_num(a))
